@@ -1,0 +1,138 @@
+// Variables
+$color-blue-medium: #8fe2e4;
+$color-purple: #632ce7;
+$color-gray: #ccc;
+$color-gray-medium: #f8f9fa;
+$color-yellow: #fac32c;
+
+// Mixin para los iconos sociales
+@mixin social-icon($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s filter;
+}
+
+// Mixin para el gradiente radial
+@mixin radial-gradient($color1, $color2, $color3) {
+  background: radial-gradient($color1 30%, $color2 30% 70%, $color3 70%, transparent 70%);
+}
+
+// Mixin para los frames
+@mixin photo-frame($box-size, $background-image) {
+  font-size: 20px;
+
+  &::before, &::after {
+    content: "";
+    display: block;
+    width: $box-size;
+    height: $box-size;
+    position: absolute;
+    z-index: -10;
+    animation: turnZ 7s linear alternate-reverse infinite;
+  }
+
+  &::before {
+    background-image: radial-gradient(var(--color-blue-medium) 50%, var(--color-purple) 50%);
+    top: calc(99% - (#{$box-size} / 2));
+    right: calc(99% - (#{$box-size} / 2));
+  }
+
+  &::after {
+    bottom: calc(98% - (#{$box-size} / 2));
+    left: calc(98% - (#{$box-size} / 2));
+    @include radial-gradient(var(--color-purple), var(--color-yellow), var(--color-gray-medium));
+  }
+}
+
+// Estilos
+:root {
+  --color-blue-medium: #8fe2e4;
+  --color-purple: #632ce7;
+  --color-gray: #ccc;
+  --color-gray-medium: #f8f9fa;
+  --color-yellow: #fac32c;
+}
+
+a {
+  color: inherit;
+}
+
+.container > .row {
+  margin-bottom: 3rem;
+}
+
+.navbar-brand > img {
+  width: 55px;
+}
+
+.navbar-main .active {
+  text-decoration: underline wavy var(--color-purple);
+  text-underline-offset: 9px;
+}
+
+.iconos-sociales > a {
+  @include social-icon(40px);
+}
+
+.iconos-sociales > a:hover {
+  filter: opacity(0.5);
+}
+
+.bg-facebook {
+  background-color: #023693;
+}
+
+.bg-twitter {
+  background-color: #33a9f3;
+}
+
+.bg-dribbble {
+  background-color: #f1066b;
+}
+
+.photo-frame {
+  @include photo-frame(3em, radial-gradient(var(--color-blue-medium), var(--color-purple), var(--color-yellow), var(--color-gray-medium)));
+}
+
+.header-main {
+  min-height: 100vh;
+}
+
+.icon-service {
+  @include social-icon(70px);
+  padding: 10px;
+}
+
+.Diseño-item:hover > img {
+  transition: 0.4s transform;
+  transform: scale(0.96);
+}
+
+.bg-purple {
+  background-color: rgba(2, 0, 10, 0.3);
+  filter: opacity(0.55);
+}
+
+.sec-clients > a {
+  transition: 0.5s filter;
+}
+
+.pt-10 {
+  padding-top: 10%;
+}
+
+@media screen and (max-width: 376px) {
+  body {
+    margin-top: 4rem;
+  }
+  .header-main {
+    min-height: initial;
+  }
+  .photo-frame {
+    font-size: 11px;
+  }
+}
